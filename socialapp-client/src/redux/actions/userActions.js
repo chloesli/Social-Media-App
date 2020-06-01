@@ -67,7 +67,7 @@ export const getUserData = () => (dispatch) => {
 export const editUserDetails = (userDetails) => (dispatch) => {
     dispatch({ type: LOADING_USER });
     axios
-      .post('/user', userDetails)
+      .post('https://us-central1-socialapp-5cb31.cloudfunctions.net/api/user', userDetails)
       .then(() => {
         dispatch(getUserData());
       })

@@ -17,6 +17,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
+import MyButton from '../util/MyButton';
 const styles = (theme) => ({
     ...theme.styles
 })
@@ -26,7 +27,7 @@ export class EditDetails extends Component {
         bio: '',
         website: '',
         location: '',
-        optne: false
+        open: false
     }
     handleOpen = () => {
         this.setState({open: true})
@@ -52,18 +53,20 @@ export class EditDetails extends Component {
         });
     };
     handleSubmit = () => {
-
+        const userDetails = {
+            bio: this.state.bio,
+            website: this.state.website,
+            location: this.state.location
+        };
+        this.props.editUserDetails(userDetails);
+        this.handleClose();
     }
     render() {
         const {classes} = this.props;
         return (
             <Fragment>
-                <Tooltip title="Edit details" placement="top">
-                    <IconButton onClick={this.handleOpen} className={classes.button}>
-                        <EditIcon color="primary"/>
-                    </IconButton>
-                </Tooltip>
-            
+                <MyButton placement="top" tip="Edit details" onClick={this.handleOpen}
+                    btnClassName={classes.button} children={<EditIcon color="primary"/>}/>
                 <Dialog 
                     open={this.state.open}
                     onClose={this.handleClose}
